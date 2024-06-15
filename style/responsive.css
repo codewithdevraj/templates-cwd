@@ -98,6 +98,9 @@
       }
     }
   }
+  .abt-sec{
+    height: 250vh;
+  }
   .abt{
     .abt-wrap{
       width: 100%;
@@ -332,6 +335,9 @@
       height: 80%;
       width: auto;
     }
+  }
+  .abt-sec{
+    height: 180vh;
   }
   .abt{
     padding: 30px 12px;
