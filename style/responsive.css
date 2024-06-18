@@ -59,12 +59,11 @@
     }
   }
   .colh22{
-    margin-top: 72px;
     width: 100%;
     min-height: 20vh;
     height: 300px;
     .frame,.picture{
-      height: 80%;
+      height: 100%;
       width: auto;
     }
   }

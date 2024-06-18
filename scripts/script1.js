@@ -58,14 +58,9 @@ function initProgressRing() {
   const progressRings = document.querySelectorAll(".progress-ring");
 
   progressRings.forEach((progressRing) => {
-    const backgroundCircle = progressRing.querySelector(
-      ".progress-ring__background"
-    );
-    const circles = [
-      progressRing.querySelector(".progress-ring__circle"),
-      progressRing.querySelector(".progress-ring__circle1"),
-      progressRing.querySelector(".progress-ring__circle2"),
-    ];
+    const circles = progressRing.querySelectorAll("circle");
+    const backgroundCircle = circles[0];
+    const progressCircles = Array.from(circles).slice(1);
 
     const radius = parseFloat(window.getComputedStyle(backgroundCircle).r);
     const circumference = 2 * Math.PI * radius;
@@ -75,13 +70,11 @@ function initProgressRing() {
     backgroundCircle.style.strokeDashoffset = 0; // Always shows the full circle
 
     let previousArcLength = 0;
-    const percents = [
-      parseInt(circles[0].getAttribute("percent"), 10),
-      parseInt(circles[1].getAttribute("percent"), 10),
-      parseInt(circles[2].getAttribute("percent"), 10),
-    ]; // Percent values for each circle
+    const percents = progressCircles.map((circle) =>
+      parseInt(circle.getAttribute("percent"), 10)
+    ); // Percent values for each progress circle
 
-    circles.forEach((circle, index) => {
+    progressCircles.forEach((circle, index) => {
       const arcLength = (percents[index] / 100) * circumference;
       const rotation = (previousArcLength / circumference) * 360;
 
@@ -107,6 +100,7 @@ function initProgressRing() {
     });
   });
 }
+
 
 // Initialize the progress rings once the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", initProgressRing);
