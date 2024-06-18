@@ -12,6 +12,26 @@
   --primary-shade-2: #09090e;
   --primary-tint-1: #f4055d;
   --primary-tint-2: #ff009d;
+
+
+  --color-python: #3572A5;
+  --color-javascript: #F7DF1E;
+  --color-html: #E34F26;
+  --color-css: #1702ff;
+  --color-react: #61DAFB;
+  --color-nodejs: #68A063;
+  --color-sql: #E38D13;
+  --color-git: #F05032;
+  --color-java: #007396;
+  --color-ruby: #CC342D;
+  --color-php: #4F5D95;
+  --color-swift: #FFAC45;
+  --color-angular: #DD0031;
+  --color-vuejs: #4FC08D;
+  --color-typescript: #007ACC;
+  --color-spring: #6DB33F;
+  --color-laravel: #FF2D20;
+  --color-rails: #CC0000;
 }
 * {
   margin: 0;
@@ -150,7 +170,7 @@ main {
   position: relative;
 }
 .hero {
-  min-height: 100vh;
+  min-height: 712px;
   padding: 40px;
   padding-top: 75px;
   background-image: url("/resources/hero-bg.jpg");
@@ -272,7 +292,8 @@ main {
   min-height: 80vh;
   position: relative;
   opacity: 1;
-  transition: all 0.6s ease-in-out;
+  scale: 1;
+  transition: all 1s ease-in-out;
   overflow: hidden;
   .frame {
     position: absolute;
@@ -297,7 +318,8 @@ main {
 }
 .colh22.hide {
   opacity: 0;
-  transform: translateX(100%);
+  /* transform: translateX(100%); */
+  scale: 0;
 }
 
 .abt-sec {
@@ -425,13 +447,14 @@ main {
   background-color: rgb(255, 0, 144);
 }
 
+
 .skills {
-  /* min-height: 100vh; */
   display: flex;
   justify-content: space-evenly;
 }
+
 .skills-wrap {
-  width: 45%;
+  width: 30%;
   padding: 40px;
   h2 {
     font-size: 3rem;
@@ -461,98 +484,103 @@ main {
         border-radius: 10px;
         .skill-bar-fill {
           height: 100%;
-          background-color: #b1094c;
+          
           border-radius: 10px;
         }
       }
     }
   }
 }
-
 .prjctg-wrap {
-  width: 50%;
+  width: 70%;
   height: 100%;
   padding: 40px 0;
-  h2 {
+  h2{
     font-size: 3rem;
     text-align: center;
     margin-bottom: 20px;
     color: #f4055d;
-  }
-  .prj-list {
-    width: 100%;
-    padding: 20px;
-  }
-  .prj {
-    width: clamp(280px, 100%, 500px );
-    border: 2px solid #b1094c;
-    border-radius: 15px;
-    padding: 20px 12px;
-    background-color: #110422;
-    margin-bottom: 20px;
-    h3 {
-      font-size: 1.5rem;
-      color: #a4acab;
-      padding-left: 20px;
-      margin-bottom: 20px;
-    }
-    .prjskls {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-    }
-    .prjskl{
-      position: relative;
-      svg{
-        width: 80px;
-        height: 80px;
-      }
-      h4{
-        font-size: 1rem;
-        color: #a4acab;
-        position: absolute;
-        bottom: 0%;
-        left: 50%;
-        transform: translate(-50%, 0%);
-      }
-    }
+  
   }
 }
 
+.prj-list {
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
 
-.progress-ring__circle{
- stroke:rgb(255, 0, 144);
-  stroke-width:4;
-  fill:transparent;
-  r:30;
-  cx:40;
-  cy:40;
+.prj {
+  width: 280px;
+  border: 2px solid #b1094c;
+  border-radius: 15px;
+  padding: 20px 12px;
+  background-color: #110422;
+  margin-bottom: 20px;
+}
+
+.prjskl {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+}
+
+.progress-ring {
+  width: 80px;
+  height: 80px;
+}
+
+.progress-ring__circle,
+.progress-ring__circle1,
+.progress-ring__circle2,
+.progress-ring__background {
+  stroke-width: 8;
+  fill: transparent;
+  r: 30;
+  cx: 40;
+  cy: 40;
   transition: 0.3s stroke-dashoffset;
-  transform: rotate(135deg);
+  transform: rotate(-90deg);
   transform-origin: 50% 50%;
 }
 
 .progress-ring__background {
-  stroke:rgba(205, 50, 76, 0.645);
-  stroke-width:4;
-  fill:transparent;
-  r:30;
-  cx:40;
-  cy:40;
-  transition: 0.3s stroke-dashoffset;
-  transform: rotate(135deg);
-  transform-origin: 50% 50%;
+  stroke: #030303;
 }
 
-.progress-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.2rem;
-  font-weight: bold;
+/* .progress-ring__circle {
+  stroke: #ff0090;
 }
 
+.progress-ring__circle1 {
+  stroke: #ffa500;
+}
+
+.progress-ring__circle2 {
+  stroke: #cc00ff;
+} */
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
 
 
 

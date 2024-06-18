@@ -44,8 +44,8 @@ hamburger.addEventListener("click", function () {
 });
 
 const main = document.getElementById("main");
-const abt_sec = document.querySelector(".abt-sec")
-const abt = document.querySelector(".abt")
+const abt_sec = document.querySelector(".abt-sec");
+const abt = document.querySelector(".abt");
 const hero = document.getElementById("hero");
 const skills = document.querySelector(".skills");
 const colh22 = document.querySelector(".colh22");
@@ -54,53 +54,62 @@ const colh21 = document.querySelector(".colh21");
 let newcondition = "";
 let progress = "";
 
+function initProgressRing() {
+  const progressRings = document.querySelectorAll(".progress-ring");
 
-function initiateskill() {
-  document.querySelectorAll(".prjskl").forEach((prjskl) => {
-    const progressRing = prjskl.querySelector(".progress-ring");
-    const circle = progressRing.querySelector(".progress-ring__circle");
+  progressRings.forEach((progressRing) => {
     const backgroundCircle = progressRing.querySelector(
       ".progress-ring__background"
     );
-    function getComputedRadius(element) {
-      const styles = window.getComputedStyle(element);
-      const r = parseFloat(styles.getPropertyValue("r"));
-      return r;
-    }
+    const circles = [
+      progressRing.querySelector(".progress-ring__circle"),
+      progressRing.querySelector(".progress-ring__circle1"),
+      progressRing.querySelector(".progress-ring__circle2"),
+    ];
 
-    const radius = getComputedRadius(circle);
+    const radius = parseFloat(window.getComputedStyle(backgroundCircle).r);
     const circumference = 2 * Math.PI * radius;
-    const arcLength = (3 / 4) * circumference; // 270 degrees is 3/4 of the full circle
-    const progressText = prjskl.querySelector(".progress-text"); // Changed to prjskl.querySelector
 
     // Setup background circle
-    backgroundCircle.style.strokeDasharray = `${arcLength} ${circumference}`;
-    backgroundCircle.style.strokeDashoffset = 0; // Always shows the full 270-degree arc
+    backgroundCircle.style.strokeDasharray = `${circumference}`;
+    backgroundCircle.style.strokeDashoffset = 0; // Always shows the full circle
 
-    // Setup progress circle
-    circle.style.strokeDasharray = `${arcLength} ${circumference}`;
-    circle.style.strokeDashoffset = arcLength;
+    let previousArcLength = 0;
+    const percents = [
+      parseInt(circles[0].getAttribute("percent"), 10),
+      parseInt(circles[1].getAttribute("percent"), 10),
+      parseInt(circles[2].getAttribute("percent"), 10),
+    ]; // Percent values for each circle
 
-    function setProgress(percent) {
-      const offset = arcLength - (percent / 100) * arcLength;
-      circle.style.strokeDashoffset = offset;
-      progressText.textContent = `${percent}%`;
-    }
+    circles.forEach((circle, index) => {
+      const arcLength = (percents[index] / 100) * circumference;
+      const rotation = (previousArcLength / circumference) * 360;
 
-    let progressc = 0;
-    const percent = parseInt(circle.getAttribute("percent"), 10);
-    const interval = setInterval(() => {
-      if (progressc > percent) {
-        clearInterval(interval);
-      } else {
-        setProgress(progressc);
-        progressc++;
-      }
-    }, 30);
+      // Setup progress circle
+      circle.style.strokeDasharray = `${arcLength} ${circumference}`;
+      circle.style.strokeDashoffset = arcLength;
+      circle.style.transformOrigin = "50% 50%"; // Set the origin for rotation
+      circle.style.transform = `rotate(${rotation}deg)`; // Rotate the circle
+
+      // Setup animation
+      let progress = 0;
+      const interval = setInterval(() => {
+        if (progress > 100) {
+          clearInterval(interval);
+        } else {
+          const offset = arcLength - (progress / 100) * arcLength;
+          circle.style.strokeDashoffset = offset;
+          progress++;
+        }
+      }, 10);
+
+      previousArcLength += arcLength;
+    });
   });
-
 }
 
+// Initialize the progress rings once the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", initProgressRing);
 
 function handleScrollmain() {
   const rect_abt_sec = abt_sec.getBoundingClientRect();
@@ -126,11 +135,11 @@ function handleScrollmain() {
 
   //her-section Animation
   if (rect_hero.top <= window.innerHeight - 50 && rect_hero.bottom >= 300) {
-    colh21.classList.remove("hide")
-    colh22.classList.remove("hide")
+    colh21.classList.remove("hide");
+    colh22.classList.remove("hide");
   } else {
-    colh21.classList.add("hide")
-    colh22.classList.add("hide")
+    colh21.classList.add("hide");
+    colh22.classList.add("hide");
   }
 
   // console.log(main.offsetHeight, rect_abt_sec.top, rect_abt_sec.bottom);
@@ -140,8 +149,6 @@ function handleScrollmain() {
   var abt_counter = document.querySelector(".abt-counter");
   var abt_wrap = document.querySelector(".abt-wrap");
   var progress_bar = document.querySelector(".prgbr");
-
-
 
   if (currentposition >= 1) {
     currentposition = 1;
@@ -157,8 +164,7 @@ function handleScrollmain() {
     abt_wrap.classList.remove("hide");
     abt_counter.classList.remove("hide");
     abt_projects.classList.add("hide");
-  }
-  else if (currentposition > 0.6 && currentposition <= 1) {
+  } else if (currentposition > 0.6 && currentposition <= 1) {
     abt_wrap.classList.remove("hide");
     abt_counter.classList.remove("hide");
     abt_projects.classList.remove("hide");
@@ -174,13 +180,11 @@ function handleScrollmain() {
     rect_skills.top <= window.innerHeight / 4 &&
     rect_skills.top >= window.innerHeight / 5
   ) {
-    initiateskill();
+    initProgressRing();
   }
-  
-
 }
 
-handleScrollmain()
+handleScrollmain();
 
 function alert() {
   if (newcondition === "entered") {
@@ -202,6 +206,3 @@ function alert() {
 }
 
 window.addEventListener("scroll", handleScrollmain);
-
-
-
