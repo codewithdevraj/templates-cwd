@@ -147,21 +147,38 @@
     height: 50vh;
     top: 40%;
   }
-
   .skills{
     flex-direction: column;
     align-items: center;
     .skills-wrap{
       width: 100%;
       max-width: 700px;
-      padding: 40px 8px;
+      padding: 40px 20px;
     }
     .prjctg-wrap{
       width: 100%;
       padding: 40px 20px;
       .prj-list{
         padding: 0;
-        /* grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); */
+        grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+        gap: 12px;
+        .prj{
+          width: 220px;
+        }
+        .progress-ring {
+          width: 60px;
+          height: 60px;
+        }
+        .progress-ring__circle, .progress-ring__circle1, .progress-ring__circle2, .progress-ring__background {
+          stroke-width: 8;
+          fill: transparent;
+          r: 25;
+          cx: 30;
+          cy: 30;
+          transition: 0.3s stroke-dashoffset;
+          transform: rotate(-90deg);
+          transform-origin: 50% 50%;
+        }
       }
 
     }
@@ -354,6 +371,47 @@
     top: 68%;
     i{
       display: none;
+    }
+  }
+  .skills{
+    .skills-wrap{
+      width: 100%;
+      max-width: 700px;
+      padding: 40px 8px;
+    }
+    .prjctg-wrap{
+      width: 100%;
+      padding: 40px 20px;
+      .prj-list{
+        padding: 0;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+        .prj{
+          width: 100%;
+          h3{
+            text-align: center;
+            overflow-wrap: break-word;
+          }
+        }
+        .prjskl{
+          flex-direction: column;
+        }
+        .progress-ring {
+          width: 60px;
+          height: 60px;
+        }
+        .progress-ring__circle, .progress-ring__circle1, .progress-ring__circle2, .progress-ring__background {
+          stroke-width: 8;
+          fill: transparent;
+          r: 25;
+          cx: 30;
+          cy: 30;
+          transition: 0.3s stroke-dashoffset;
+          transform: rotate(-90deg);
+          transform-origin: 50% 50%;
+        }
+      }
+
     }
   }
 }
